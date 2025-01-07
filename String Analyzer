@@ -1,0 +1,56 @@
+public class StringAnalyzer {
+
+    /**
+     * Counts uppercase letters in the string.
+     */
+    public int countUppercase(String input) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isUpperCase(input.charAt(i))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts lowercase letters in the string.
+     */
+    public int countLowercase(String input) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isLowerCase(input.charAt(i))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts digits (0-9) in the string.
+     */
+    public int countDigits(String input) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isDigit(input.charAt(i))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts special characters in the string.
+     * Here, anything not a letter or digit is considered special.
+     */
+    public int countSpecialChars(String input) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            if (!Character.isLetterOrDigit(ch)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
