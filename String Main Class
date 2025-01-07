@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class StringValidationMain {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        StringValidationProcessor processor = new StringValidationProcessor();
+
+        System.out.println("Welcome to the String Validation Program!");
+
+        // Collect and validate user input
+        processor.collectUserInput(scanner);
+
+        // Once we have a valid string, display the analysis
+        System.out.println("\n--- Analysis Results ---");
+        processor.displayAnalysis();
+
+        scanner.close();
+    }
+}
