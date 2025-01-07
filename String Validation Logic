@@ -1,0 +1,75 @@
+import java.util.Scanner;
+
+public class StringValidationProcessor {
+    private static final int MAX_ATTEMPTS = 3;
+    private String validString = null;
+
+    /**
+     * Collects user input, ensures it's at least 12 characters,
+     * checks for required characters, and tracks invalid attempts.
+     */
+    public void collectUserInput(Scanner scanner) {
+        int attempts = 0;
+
+        while (true) {
+            System.out.print("Enter a string (>= 12 chars, containing 'a', 'e', 'z'): ");
+            String userInput = scanner.nextLine();
+
+            // Check length
+            if (userInput.length() < 12) {
+                attempts++;
+                System.out.println("String is too short. Attempts used: "
+                                   + attempts + " / " + MAX_ATTEMPTS);
+
+                if (attempts == MAX_ATTEMPTS) {
+                    System.out.println("Maximum invalid attempts reached. Exiting program.");
+                    break;
+                }
+            } else {
+                // Check for required characters
+                if (!containsRequiredChars(userInput, 'a', 'e', 'z')) {
+                    System.out.println("String does not contain all required characters ('a', 'e', 'z').");
+                } else {
+                    // We have a valid string
+                    this.validString = userInput;
+                    System.out.println("Valid string received!");
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Checks if the input string contains all the specified characters.
+     */
+    private boolean containsRequiredChars(String input, char c1, char c2, char c3) {
+        // We do individual index checks for clarity.
+        if (input.indexOf(c1) == -1) return false;
+        if (input.indexOf(c2) == -1) return false;
+        if (input.indexOf(c3) == -1) return false;
+        return true;
+    }
+
+    /**
+     * Displays the analysis of the valid string if it exists.
+     */
+    public void displayAnalysis() {
+        if (validString == null) {
+            System.out.println("No valid string to analyze.");
+            return;
+        }
+
+        // Analyze the string (counts uppercase, lowercase, digits, special chars)
+        StringAnalyzer analyzer = new StringAnalyzer();
+        int uppercaseCount = analyzer.countUppercase(validString);
+        int lowercaseCount = analyzer.countLowercase(validString);
+        int digitCount     = analyzer.countDigits(validString);
+        int specialCount   = analyzer.countSpecialChars(validString);
+
+        System.out.println("String: " + validString);
+        System.out.println("Uppercase letters:   " + uppercaseCount);
+        System.out.println("Lowercase letters:   " + lowercaseCount);
+        System.out.println("Digits:              " + digitCount);
+        System.out.println("Special characters:  " + specialCount);
+    }
+}
